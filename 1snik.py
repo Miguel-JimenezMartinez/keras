@@ -3,7 +3,7 @@ from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import SGD
-#from matplotlib import pyplot as plt
+import time
 
 #Cargando los datos
 
@@ -48,6 +48,10 @@ model.add(Dense(10, activation='softmax'))
 model.compile(loss='mean_squared_error', optimizer=SGD(lr=0.01), metrics=['accuracy'])
 
 #entrenando
+inicio = time.time()
+model.fit(X_train, y_train, batch_size=128, epochs=200, verbose=1, validation_data=(X_valid, y_valid))
+final = time.time()
 
-model.fit(X_train, y_train, batch_size=128, epochs=2, verbose=1, validation_data=(X_valid, y_valid))
+tiempo = final-inicio
 
+print(str(tiempo)+ " segundos")
